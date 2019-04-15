@@ -78,6 +78,9 @@
                     @endauth
                 </div>
             @endif
+            <div>
+                Приветственная страница с лендингом.
+            </div>
         </div>
     </body>
 </html>
