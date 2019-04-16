@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,7 +30,7 @@ class EventController extends Controller
     {
         $event = Event::find($id);
         return view('event.event')->with([
-            'event' => $event
+            'event' => $event,
         ]);
     }
 
