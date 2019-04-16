@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
-use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,14 +11,13 @@ class EventController extends Controller
 
     public function index()
     {
-
     }
 
     public function store(Request $request)
     {
         $event = new Event;
         $event->fill($request->all());
-        $characters = array_merge(range('A','Z'));
+        $characters = array_merge(range('A', 'Z'));
         $event->code = $characters[rand(0, count($characters) - 1)].rand(100, 999);
         $event->admin_id = Auth::id();
         $event->save();
@@ -47,5 +45,11 @@ class EventController extends Controller
         $event = Event::find($id);
         $event->delete();
         return redirect()->back();
+    }
+
+    public function list(Request $request)
+    {
+        $events = Event::where('code', $request->code)->get();
+        return view('welcome')->with('events', $events);
     }
 }

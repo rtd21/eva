@@ -21,5 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('admin', 'AdminController');
 Route::resource('event', 'EventController');
+Route::post('event/list', 'EventController@list')->name('event.list');
 Route::resource('event.speaker', 'SpeakerController');
 Route::resource('event.schedule', 'ScheduleBlockController');

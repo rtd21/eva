@@ -20,12 +20,10 @@ class AdminController extends Controller
 
     public function create()
     {
-
     }
 
     public function store(Request $request)
     {
-
     }
 
     public function update(Request $request, $id)
@@ -38,6 +36,5 @@ class AdminController extends Controller
 
     public function destroy($id)
     {
-
     }
 }
