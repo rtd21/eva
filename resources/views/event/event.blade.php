@@ -240,7 +240,54 @@
                     </tbody>
                 </table>
             </div>
-            <div class="tab-pane" id="questions" role="tabpanel" aria-labelledby="messages-tab">questions</div>
+            <div class="tab-pane" id="questions" role="tabpanel" aria-labelledby="messages-tab">
+                <ul class="list-group">
+                    @foreach($event->questions as $question)
+                        <li class="list-group-item">
+
+                            {{ $question->user->name }}:
+                            {{ $question->question }}
+                            <a class="btn btn-outline-success" data-toggle="modal" data-target="#reply">
+                                Reply
+                            </a>
+                            <div class="modal fade" id="reply" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel">Reply question</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{ route('event.question.reply', [$event->id, $question->id]) }}" method="POST">
+                                                @method('POST')
+                                                @csrf
+                                                <div class="form-group">
+                                                    <label for="reply">Reply</label>
+                                                    <input type="text" class="form-control" id="reply" name="reply">
+                                                </div>
+                                                <button type="submit" class="btn btn-success">Reply</button>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="list-group">
+                                @foreach($question->replies as $reply)
+                                    <li class="list-group-item">
+                                        {{ $reply->reply }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
             <div class="tab-pane" id="votes" role="tabpanel" aria-labelledby="settings-tab">votes</div>
         </div>
 

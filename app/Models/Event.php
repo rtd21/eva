@@ -39,4 +39,9 @@ class Event extends Model
         $interval = $end_date->diff($start_date);
         return $interval->d + 1;
     }
+
+    public function questions()
+    {
+        return $this->hasMany('App\Models\Question');
+    }
 }

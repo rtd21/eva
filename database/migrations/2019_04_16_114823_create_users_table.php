@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('company');
             $table->string('email');
-            $table->integer('points');
+            $table->integer('points')->default(0);
             $table->bigInteger('event_id')->unsigned();
             $table->foreign('event_id')
                 ->references('id')->on('events')

@@ -24,3 +24,6 @@ Route::resource('event', 'EventController');
 Route::post('event/list', 'EventController@list')->name('event.list');
 Route::resource('event.speaker', 'SpeakerController');
 Route::resource('event.schedule', 'ScheduleBlockController');
+Route::resource('event.question', 'QuestionController');
+Route::post('event/{event}/question/{question}/reply', 'QuestionController@reply')
+    ->name('event.question.reply');
