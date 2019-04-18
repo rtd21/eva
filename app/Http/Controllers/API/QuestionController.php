@@ -35,6 +35,10 @@ class QuestionController extends Controller
 
     public function destroy($id)
     {
-
+        $question = Question::find($id);
+        $question->delete();
+        return response()->json([
+            'status' => '200 OK'
+        ]);
     }
 }
