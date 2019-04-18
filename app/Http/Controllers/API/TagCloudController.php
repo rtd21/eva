@@ -2,24 +2,22 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Choice;
-use App\Models\MultipleChoice;
+use App\Models\TagCloud;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class MultipleChoiceController extends Controller
+class TagCloudController extends Controller
 {
     public function index()
     {
-        //
     }
 
     public function store(Request $request, $event_id)
     {
-        $multipleChoice = new MultipleChoice();
-        $multipleChoice->fill($request->all());
-        $multipleChoice->event_id = $event_id;
-        $multipleChoice->setChoices($request);
+        $tagCloud = new TagCloud;
+        $tagCloud->fill($request->all());
+        $tagCloud->event_id = $event_id;
+        $tagCloud->save();
         return redirect()->back();
     }
 
@@ -30,12 +28,12 @@ class MultipleChoiceController extends Controller
 
     public function update(Request $request, $event_id, $id)
     {
-        $multipleChoice = MultipleChoice::find($id);
-        $multipleChoice->update([
+        $tagCloud = TagCloud::find($id);
+        $tagCloud->update([
             'question' => $request->question
         ]);
-        $multipleChoice->setParams($request);
-        $multipleChoice->save();
+        $tagCloud->setParams($request);
+        $tagCloud->save();
         return redirect()->back();
     }
 

@@ -345,27 +345,27 @@
                                                             </div>
                                                             <div class="custom-control custom-switch">
                                                                 @if($rating->voting_open)
-                                                                    <input type="checkbox" checked class="custom-control-input" id="voting_open{{ $rating->id }}" name="voting_open" value="{{ $rating->voting_open }}">
+                                                                    <input type="checkbox" checked class="custom-control-input" id="voting_openRating{{ $rating->id }}" name="voting_open" value="{{ $rating->voting_open }}">
                                                                 @else
-                                                                    <input type="checkbox" class="custom-control-input" id="voting_open{{ $rating->id }}" name="voting_open" value="{{ $rating->voting_open }}">
+                                                                    <input type="checkbox" class="custom-control-input" id="voting_openRating{{ $rating->id }}" name="voting_open" value="{{ $rating->voting_open }}">
                                                                 @endif
-                                                                <label class="custom-control-label" for="voting_open{{ $rating->id }}">Voting open</label>
+                                                                <label class="custom-control-label" for="voting_openRating{{ $rating->id }}">Voting open</label>
                                                             </div>
                                                             <div class="custom-control custom-switch">
                                                                 @if($rating->results_visible)
-                                                                    <input type="checkbox" checked class="custom-control-input" id="results_visible{{ $rating->id }}" name="results_visible" value="{{ $rating->results_visible }}">
+                                                                    <input type="checkbox" checked class="custom-control-input" id="results_visibleRating{{ $rating->id }}" name="results_visible" value="{{ $rating->results_visible }}">
                                                                 @else
-                                                                    <input type="checkbox" class="custom-control-input" id="results_visible{{ $rating->id }}" name="results_visible" value="{{ $rating->results_visible }}">
+                                                                    <input type="checkbox" class="custom-control-input" id="results_visibleRating{{ $rating->id }}" name="results_visible" value="{{ $rating->results_visible }}">
                                                                 @endif
-                                                                <label class="custom-control-label" for="results_visible{{ $rating->id }}">Results visible</label>
+                                                                <label class="custom-control-label" for="results_visibleRating{{ $rating->id }}">Results visible</label>
                                                             </div>
                                                             <div class="custom-control custom-switch">
                                                                 @if($rating->activate_poll)
-                                                                    <input type="checkbox" checked class="custom-control-input" id="activate_poll{{ $rating->id }}" name="activate_poll" value="{{ $rating->activate_poll }}">
+                                                                    <input type="checkbox" checked class="custom-control-input" id="activate_pollRating{{ $rating->id }}" name="activate_poll" value="{{ $rating->activate_poll }}">
                                                                 @else
-                                                                    <input type="checkbox" class="custom-control-input" id="activate_poll{{ $rating->id }}" name="activate_poll" value="{{ $rating->activate_poll }}">
+                                                                    <input type="checkbox" class="custom-control-input" id="activate_pollRating{{ $rating->id }}" name="activate_poll" value="{{ $rating->activate_poll }}">
                                                                 @endif
-                                                                <label class="custom-control-label" for="activate_poll{{ $rating->id }}">Activate poll</label>
+                                                                <label class="custom-control-label" for="activate_pollRating{{ $rating->id }}">Activate poll</label>
                                                             </div>
                                                             <button type="submit" class="btn btn-success">Save changes</button>
                                                         </form>
@@ -411,6 +411,66 @@
                                     </div>
                                 </div>
                             </div>
+                            <ul class="list-group">
+                                @foreach($event->multipleChoices as $multipleChoice)
+                                    <li class="list-group-item">
+                                        {{ $multipleChoice->question }}
+                                        <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#editMultipleChoice{{ $multipleChoice->id }}">
+                                            Edit
+                                        </a>
+                                        <div class="modal fade" id="editMultipleChoice{{ $multipleChoice->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        <h4 class="modal-title" id="myModalLabel">Edit Multiple Choice</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="{{ route('event.multiple_choice.update', [$event->id, $multipleChoice->id]) }}" method="POST">
+                                                            @method('PUT')
+                                                            @csrf
+                                                            <div class="form-group">
+                                                                <label for="question">Question</label>
+                                                                <input type="text" class="form-control" id="question" name="question" value="{{ $multipleChoice->question }}">
+                                                            </div>
+                                                            <div class="custom-control custom-switch">
+                                                                @if($multipleChoice->voting_open)
+                                                                    <input type="checkbox" checked class="custom-control-input" id="voting_openMultipleChoice{{ $multipleChoice->id }}" name="voting_open" value="{{ $multipleChoice->voting_open }}">
+                                                                @else
+                                                                    <input type="checkbox" class="custom-control-input" id="voting_openMultipleChoice{{ $multipleChoice->id }}" name="voting_open" value="{{ $multipleChoice->voting_open }}">
+                                                                @endif
+                                                                <label class="custom-control-label" for="voting_openMultipleChoice{{ $multipleChoice->id }}">Voting open</label>
+                                                            </div>
+                                                            <div class="custom-control custom-switch">
+                                                                @if($multipleChoice->results_visible)
+                                                                    <input type="checkbox" checked class="custom-control-input" id="results_visibleMultipleChoice{{ $multipleChoice->id }}" name="results_visible" value="{{ $multipleChoice->results_visible }}">
+                                                                @else
+                                                                    <input type="checkbox" class="custom-control-input" id="results_visibleMultipleChoice{{ $multipleChoice->id }}" name="results_visible" value="{{ $multipleChoice->results_visible }}">
+                                                                @endif
+                                                                <label class="custom-control-label" for="results_visibleMultipleChoice{{ $multipleChoice->id }}">Results visible</label>
+                                                            </div>
+                                                            <div class="custom-control custom-switch">
+                                                                @if($multipleChoice->activate_poll)
+                                                                    <input type="checkbox" checked class="custom-control-input" id="activate_pollMultipleChoice{{ $multipleChoice->id }}" name="activate_poll" value="{{ $multipleChoice->activate_poll }}">
+                                                                @else
+                                                                    <input type="checkbox" class="custom-control-input" id="activate_pollMultipleChoice{{ $multipleChoice->id }}" name="activate_poll" value="{{ $multipleChoice->activate_poll }}">
+                                                                @endif
+                                                                <label class="custom-control-label" for="activate_pollMultipleChoice{{ $multipleChoice->id }}">Activate poll</label>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-success">Save changes</button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                         <div class="col-sm">
                             <a class="btn btn-outline-dark" data-toggle="modal" data-target="#addFreeEntry">
@@ -423,17 +483,17 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
-                                            <h4 class="modal-title" id="myModalLabel">Add Rating</h4>
+                                            <h4 class="modal-title" id="myModalLabel">Add Free Entry</h4>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="{{ route('event.rating.store', $event->id) }}" method="POST">
+                                            <form action="{{ route('event.free_entry.store', $event->id) }}" method="POST">
                                                 @method('POST')
                                                 @csrf
                                                 <div class="form-group">
                                                     <label for="question">Question</label>
                                                     <input type="text" class="form-control" id="question" name="question">
                                                 </div>
-                                                <button type="submit" class="btn btn-success">Add Rating</button>
+                                                <button type="submit" class="btn btn-success">Add Free Entry</button>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
@@ -443,52 +503,52 @@
                                 </div>
                             </div>
                             <ul class="list-group">
-                                @foreach($event->ratings as $rating)
+                                @foreach($event->freeEntries as $freeEntry)
                                     <li class="list-group-item">
-                                        {{ $rating->question }}
-                                        <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#editRating{{ $rating->id }}">
+                                        {{ $freeEntry->question }}
+                                        <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#editFreeEntry{{ $freeEntry->id }}">
                                             Edit
                                         </a>
-                                        <div class="modal fade" id="editRating{{ $rating->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="editFreeEntry{{ $freeEntry->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
-                                                        <h4 class="modal-title" id="myModalLabel">Edit Rating</h4>
+                                                        <h4 class="modal-title" id="myModalLabel">Edit Free Entry</h4>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="{{ route('event.rating.update', [$event->id, $rating->id]) }}" method="POST">
+                                                        <form action="{{ route('event.free_entry.update', [$event->id, $freeEntry->id]) }}" method="POST">
                                                             @method('PUT')
                                                             @csrf
                                                             <div class="form-group">
                                                                 <label for="question">Question</label>
-                                                                <input type="text" class="form-control" id="question" name="question" value="{{ $rating->question }}">
+                                                                <input type="text" class="form-control" id="question" name="question" value="{{ $freeEntry->question }}">
                                                             </div>
                                                             <div class="custom-control custom-switch">
-                                                                @if($rating->voting_open)
-                                                                    <input type="checkbox" checked class="custom-control-input" id="voting_open{{ $rating->id }}" name="voting_open" value="{{ $rating->voting_open }}">
+                                                                @if($freeEntry->voting_open)
+                                                                    <input type="checkbox" checked class="custom-control-input" id="voting_openFreeEntry{{ $freeEntry->id }}" name="voting_open" value="{{ $freeEntry->voting_open }}">
                                                                 @else
-                                                                    <input type="checkbox" class="custom-control-input" id="voting_open{{ $rating->id }}" name="voting_open" value="{{ $rating->voting_open }}">
+                                                                    <input type="checkbox" class="custom-control-input" id="voting_openFreeEntry{{ $freeEntry->id }}" name="voting_open" value="{{ $freeEntry->voting_open }}">
                                                                 @endif
-                                                                <label class="custom-control-label" for="voting_open{{ $rating->id }}">Voting open</label>
+                                                                <label class="custom-control-label" for="voting_openFreeEntry{{ $freeEntry->id }}">Voting open</label>
                                                             </div>
                                                             <div class="custom-control custom-switch">
-                                                                @if($rating->results_visible)
-                                                                    <input type="checkbox" checked class="custom-control-input" id="results_visible{{ $rating->id }}" name="results_visible" value="{{ $rating->results_visible }}">
+                                                                @if($freeEntry->results_visible)
+                                                                    <input type="checkbox" checked class="custom-control-input" id="results_visibleFreeEntry{{ $freeEntry->id }}" name="results_visible" value="{{ $freeEntry->results_visible }}">
                                                                 @else
-                                                                    <input type="checkbox" class="custom-control-input" id="results_visible{{ $rating->id }}" name="results_visible" value="{{ $rating->results_visible }}">
+                                                                    <input type="checkbox" class="custom-control-input" id="results_visibleFreeEntry{{ $freeEntry->id }}" name="results_visible" value="{{ $freeEntry->results_visible }}">
                                                                 @endif
-                                                                <label class="custom-control-label" for="results_visible{{ $rating->id }}">Results visible</label>
+                                                                <label class="custom-control-label" for="results_visibleFreeEntry{{ $freeEntry->id }}">Results visible</label>
                                                             </div>
                                                             <div class="custom-control custom-switch">
-                                                                @if($rating->activate_poll)
-                                                                    <input type="checkbox" checked class="custom-control-input" id="activate_poll{{ $rating->id }}" name="activate_poll" value="{{ $rating->activate_poll }}">
+                                                                @if($freeEntry->activate_poll)
+                                                                    <input type="checkbox" checked class="custom-control-input" id="activate_pollFreeEntry{{ $freeEntry->id }}" name="activate_poll" value="{{ $freeEntry->activate_poll }}">
                                                                 @else
-                                                                    <input type="checkbox" class="custom-control-input" id="activate_poll{{ $rating->id }}" name="activate_poll" value="{{ $rating->activate_poll }}">
+                                                                    <input type="checkbox" class="custom-control-input" id="activate_pollFreeEntry{{ $freeEntry->id }}" name="activate_poll" value="{{ $freeEntry->activate_poll }}">
                                                                 @endif
-                                                                <label class="custom-control-label" for="activate_poll{{ $rating->id }}">Activate poll</label>
+                                                                <label class="custom-control-label" for="activate_pollFreeEntry{{ $freeEntry->id }}">Activate poll</label>
                                                             </div>
                                                             <button type="submit" class="btn btn-success">Save changes</button>
                                                         </form>
@@ -514,17 +574,17 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
-                                            <h4 class="modal-title" id="myModalLabel">Add Rating</h4>
+                                            <h4 class="modal-title" id="myModalLabel">Add Tag Cloud</h4>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="{{ route('event.rating.store', $event->id) }}" method="POST">
+                                            <form action="{{ route('event.tag_cloud.store', $event->id) }}" method="POST">
                                                 @method('POST')
                                                 @csrf
                                                 <div class="form-group">
                                                     <label for="question">Question</label>
                                                     <input type="text" class="form-control" id="question" name="question">
                                                 </div>
-                                                <button type="submit" class="btn btn-success">Add Rating</button>
+                                                <button type="submit" class="btn btn-success">Add Tag Cloud</button>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
@@ -534,52 +594,52 @@
                                 </div>
                             </div>
                             <ul class="list-group">
-                                @foreach($event->ratings as $rating)
+                                @foreach($event->tagClouds as $tagCloud)
                                     <li class="list-group-item">
-                                        {{ $rating->question }}
-                                        <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#editRating{{ $rating->id }}">
+                                        {{ $tagCloud->question }}
+                                        <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#editTagCloud{{ $tagCloud->id }}">
                                             Edit
                                         </a>
-                                        <div class="modal fade" id="editRating{{ $rating->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="editTagCloud{{ $tagCloud->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
-                                                        <h4 class="modal-title" id="myModalLabel">Edit Rating</h4>
+                                                        <h4 class="modal-title" id="myModalLabel">Edit Tag Cloud</h4>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="{{ route('event.rating.update', [$event->id, $rating->id]) }}" method="POST">
+                                                        <form action="{{ route('event.tag_cloud.update', [$event->id, $tagCloud->id]) }}" method="POST">
                                                             @method('PUT')
                                                             @csrf
                                                             <div class="form-group">
                                                                 <label for="question">Question</label>
-                                                                <input type="text" class="form-control" id="question" name="question" value="{{ $rating->question }}">
+                                                                <input type="text" class="form-control" id="question" name="question" value="{{ $tagCloud->question }}">
                                                             </div>
                                                             <div class="custom-control custom-switch">
-                                                                @if($rating->voting_open)
-                                                                    <input type="checkbox" checked class="custom-control-input" id="voting_open{{ $rating->id }}" name="voting_open" value="{{ $rating->voting_open }}">
+                                                                @if($tagCloud->voting_open)
+                                                                    <input type="checkbox" checked class="custom-control-input" id="voting_openTagCloud{{ $tagCloud->id }}" name="voting_open" value="{{ $tagCloud->voting_open }}">
                                                                 @else
-                                                                    <input type="checkbox" class="custom-control-input" id="voting_open{{ $rating->id }}" name="voting_open" value="{{ $rating->voting_open }}">
+                                                                    <input type="checkbox" class="custom-control-input" id="voting_openTagCloud{{ $tagCloud->id }}" name="voting_open" value="{{ $tagCloud->voting_open }}">
                                                                 @endif
-                                                                <label class="custom-control-label" for="voting_open{{ $rating->id }}">Voting open</label>
+                                                                <label class="custom-control-label" for="voting_openTagCloud{{ $tagCloud->id }}">Voting open</label>
                                                             </div>
                                                             <div class="custom-control custom-switch">
-                                                                @if($rating->results_visible)
-                                                                    <input type="checkbox" checked class="custom-control-input" id="results_visible{{ $rating->id }}" name="results_visible" value="{{ $rating->results_visible }}">
+                                                                @if($tagCloud->results_visible)
+                                                                    <input type="checkbox" checked class="custom-control-input" id="results_visibleTagCloud{{ $tagCloud->id }}" name="results_visible" value="{{ $tagCloud->results_visible }}">
                                                                 @else
-                                                                    <input type="checkbox" class="custom-control-input" id="results_visible{{ $rating->id }}" name="results_visible" value="{{ $rating->results_visible }}">
+                                                                    <input type="checkbox" class="custom-control-input" id="results_visibleTagCloud{{ $tagCloud->id }}" name="results_visible" value="{{ $tagCloud->results_visible }}">
                                                                 @endif
-                                                                <label class="custom-control-label" for="results_visible{{ $rating->id }}">Results visible</label>
+                                                                <label class="custom-control-label" for="results_visibleTagCloud{{ $tagCloud->id }}">Results visible</label>
                                                             </div>
                                                             <div class="custom-control custom-switch">
-                                                                @if($rating->activate_poll)
-                                                                    <input type="checkbox" checked class="custom-control-input" id="activate_poll{{ $rating->id }}" name="activate_poll" value="{{ $rating->activate_poll }}">
+                                                                @if($tagCloud->activate_poll)
+                                                                    <input type="checkbox" checked class="custom-control-input" id="activate_pollTagCloud{{ $tagCloud->id }}" name="activate_poll" value="{{ $tagCloud->activate_poll }}">
                                                                 @else
-                                                                    <input type="checkbox" class="custom-control-input" id="activate_poll{{ $rating->id }}" name="activate_poll" value="{{ $rating->activate_poll }}">
+                                                                    <input type="checkbox" class="custom-control-input" id="activate_pollTagCloud{{ $tagCloud->id }}" name="activate_poll" value="{{ $tagCloud->activate_poll }}">
                                                                 @endif
-                                                                <label class="custom-control-label" for="activate_poll{{ $rating->id }}">Activate poll</label>
+                                                                <label class="custom-control-label" for="activate_pollTagCloud{{ $tagCloud->id }}">Activate poll</label>
                                                             </div>
                                                             <button type="submit" class="btn btn-success">Save changes</button>
                                                         </form>

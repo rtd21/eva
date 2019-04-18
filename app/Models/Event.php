@@ -49,4 +49,19 @@ class Event extends Model
     {
         return $this->hasMany('App\Models\Rating');
     }
+
+    public function multipleChoices()
+    {
+        return $this->hasMany('App\Models\MultipleChoice');
+    }
+
+    public function freeEntries()
+    {
+        return $this->hasMany('App\Models\FreeEntry');
+    }
+
+    public function tagClouds()
+    {
+        return $this->hasMany('App\Models\TagCloud');
+    }
 }

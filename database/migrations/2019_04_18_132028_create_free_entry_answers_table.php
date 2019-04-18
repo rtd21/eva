@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateChoicesTable extends Migration
+class CreateFreeEntryAnswersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateChoicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('choices', function (Blueprint $table) {
+        Schema::create('free_entry_answers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('answer');
-            $table->integer('count')->default(0);
-            $table->bigInteger('multiple_choice_id')->unsigned()->nullable();
-            $table->foreign('multiple_choice_id')
+            $table->bigInteger('free_entry_id')->unsigned()->nullable();
+            $table->foreign('free_entry_id')
                 ->references('id')
-                ->on('multiple_choices')
+                ->on('free_entries')
                 ->onDelete('cascade');
             $table->timestamps();
         });
@@ -33,6 +32,6 @@ class CreateChoicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('choices');
+        Schema::dropIfExists('free_entry_answers');
     }
 }

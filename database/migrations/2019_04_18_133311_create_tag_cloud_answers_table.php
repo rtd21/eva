@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateChoicesTable extends Migration
+class CreateTagCloudAnswersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateChoicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('choices', function (Blueprint $table) {
+        Schema::create('tag_cloud_answers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('answer');
-            $table->integer('count')->default(0);
-            $table->bigInteger('multiple_choice_id')->unsigned()->nullable();
-            $table->foreign('multiple_choice_id')
+            $table->bigInteger('tag_cloud_id')->unsigned()->nullable();
+            $table->foreign('tag_cloud_id')
                 ->references('id')
-                ->on('multiple_choices')
+                ->on('tag_clouds')
                 ->onDelete('cascade');
             $table->timestamps();
         });
@@ -33,6 +32,6 @@ class CreateChoicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('choices');
+        Schema::dropIfExists('tag_cloud_answers');
     }
 }

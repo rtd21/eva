@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Choice;
-use App\Models\MultipleChoice;
+use App\Models\FreeEntry;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class MultipleChoiceController extends Controller
+class FreeEntryController extends Controller
 {
     public function index()
     {
@@ -16,10 +15,10 @@ class MultipleChoiceController extends Controller
 
     public function store(Request $request, $event_id)
     {
-        $multipleChoice = new MultipleChoice();
-        $multipleChoice->fill($request->all());
-        $multipleChoice->event_id = $event_id;
-        $multipleChoice->setChoices($request);
+        $freeEntry = new FreeEntry;
+        $freeEntry->fill($request->all());
+        $freeEntry->event_id = $event_id;
+        $freeEntry->save();
         return redirect()->back();
     }
 
@@ -30,14 +29,15 @@ class MultipleChoiceController extends Controller
 
     public function update(Request $request, $event_id, $id)
     {
-        $multipleChoice = MultipleChoice::find($id);
-        $multipleChoice->update([
+        $freeEntry = FreeEntry::find($id);
+        $freeEntry->update([
             'question' => $request->question
         ]);
-        $multipleChoice->setParams($request);
-        $multipleChoice->save();
+        $freeEntry->setParams($request);
+        $freeEntry->save();
         return redirect()->back();
     }
+
 
     public function destroy($id)
     {
