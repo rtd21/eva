@@ -27,3 +27,4 @@ Route::resource('event.schedule', 'ScheduleBlockController');
 Route::resource('event.question', 'QuestionController');
 Route::post('event/{event}/question/{question}/reply', 'QuestionController@reply')
     ->name('event.question.reply');
+Route::resource('event.rating', 'API\RatingController');

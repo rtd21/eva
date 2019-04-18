@@ -2,11 +2,9 @@
 
 @section('content')
     <div class="container">
-
         <a class="btn btn-outline-dark" data-toggle="modal" data-target="#editEvent">
             {{ '#'.$event->code }}
         </a>
-
         <div class="modal fade" id="editEvent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -247,10 +245,10 @@
 
                             {{ $question->user->name }}:
                             {{ $question->question }}
-                            <a class="btn btn-outline-success" data-toggle="modal" data-target="#reply">
+                            <a class="btn btn-outline-success" data-toggle="modal" data-target="#reply{{ $question->id }}">
                                 Reply
                             </a>
-                            <div class="modal fade" id="reply" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                            <div class="modal fade" id="reply{{ $question->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                                  aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -288,7 +286,97 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="tab-pane" id="votes" role="tabpanel" aria-labelledby="settings-tab">votes</div>
+            <div class="tab-pane" id="votes" role="tabpanel" aria-labelledby="settings-tab">
+                <a class="btn btn-outline-dark" data-toggle="modal" data-target="#addRating">
+                    Add Rating
+                </a>
+                <div class="modal fade" id="addRating" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">Add Rating</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ route('event.rating.store', $event->id) }}" method="POST">
+                                    @method('POST')
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="question">Question</label>
+                                        <input type="text" class="form-control" id="question" name="question">
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Add Rating</button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-group">
+                    @foreach($event->ratings as $rating)
+                        <li class="list-group-item">
+                            {{ $rating->question }}
+                            <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#editRating{{ $rating->id }}">
+                                Edit
+                            </a>
+                            <div class="modal fade" id="editRating{{ $rating->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel">Edit Rating</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{ route('event.rating.update', [$event->id, $rating->id]) }}" method="POST">
+                                                @method('PUT')
+                                                @csrf
+                                                <div class="form-group">
+                                                    <label for="question">Question</label>
+                                                    <input type="text" class="form-control" id="question" name="question" value="{{ $rating->question }}">
+                                                </div>
+                                                <div class="custom-control custom-switch">
+                                                    @if($rating->voting_open)
+                                                        <input type="checkbox" checked class="custom-control-input" id="voting_open{{ $rating->id }}" name="voting_open" value="{{ $rating->voting_open }}">
+                                                    @else
+                                                        <input type="checkbox" class="custom-control-input" id="voting_open{{ $rating->id }}" name="voting_open" value="{{ $rating->voting_open }}">
+                                                    @endif
+                                                    <label class="custom-control-label" for="voting_open{{ $rating->id }}">Voting open</label>
+                                                </div>
+                                                <div class="custom-control custom-switch">
+                                                    @if($rating->results_visible)
+                                                        <input type="checkbox" checked class="custom-control-input" id="results_visible{{ $rating->id }}" name="results_visible" value="{{ $rating->results_visible }}">
+                                                    @else
+                                                        <input type="checkbox" class="custom-control-input" id="results_visible{{ $rating->id }}" name="results_visible" value="{{ $rating->results_visible }}">
+                                                    @endif
+                                                        <label class="custom-control-label" for="results_visible{{ $rating->id }}">Results visible</label>
+                                                </div>
+                                                <div class="custom-control custom-switch">
+                                                    @if($rating->activate_poll)
+                                                        <input type="checkbox" checked class="custom-control-input" id="activate_poll{{ $rating->id }}" name="activate_poll" value="{{ $rating->activate_poll }}">
+                                                    @else
+                                                        <input type="checkbox" class="custom-control-input" id="activate_poll{{ $rating->id }}" name="activate_poll" value="{{ $rating->activate_poll }}">
+                                                    @endif
+                                                        <label class="custom-control-label" for="activate_poll{{ $rating->id }}">Activate poll</label>
+                                                </div>
+                                                <button type="submit" class="btn btn-success">Save changes</button>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
 
         <script>
