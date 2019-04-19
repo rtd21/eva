@@ -7,13 +7,11 @@ use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
-    public function index($id)
+    public function destroy($event_id, $id)
     {
-    }
-
-    public function destroy($id)
-    {
-        //
+        $question = Question::find($id);
+        $question->delete();
+        return redirect()->back();
     }
 
     public function reply(Request $request, $event_id, $question_id)

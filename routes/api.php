@@ -17,4 +17,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('question', 'API\QuestionController');
+Route::apiResources([
+    'question' => 'API\QuestionController',
+    'rating' => 'API\RatingController',
+    'multiple_choice' => 'API\MultipleChoiceController',
+    'free_entry' => 'API\FreeEntryController',
+    'tag_cloud' => 'API\TagCloudController',
+]);

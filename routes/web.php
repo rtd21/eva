@@ -19,12 +19,20 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('admin', 'AdminController');
-Route::resource('event', 'EventController');
-Route::post('event/list', 'EventController@list')->name('event.list');
-Route::resource('event.speaker', 'SpeakerController');
-Route::resource('event.schedule', 'ScheduleBlockController');
-Route::resource('event.question', 'QuestionController');
+Route::middleware('auth:api')->group(function () {
+    Route::resources([
+        'admin' => 'AdminController',
+        'event' => 'EventController',
+        'event.speaker' => 'SpeakerController',
+        'event.schedule' => 'ScheduleBlockController',
+        'event.question' => 'QuestionController',
+        'event.rating' => 'RatingController',
+        'event.multiple_choice' => 'MultipleChoiceController',
+        'event.free_entry' => 'FreeEntryController',
+        'event.tag_cloud' => 'TagCloudController'
+    ]);
+    Route::post('event/list', 'EventController@list')->name('event.list');
+});
 Route::post('event/{event}/question/{question}/reply', 'QuestionController@reply')
     ->name('event.question.reply');
 Route::resource('event.rating', 'API\RatingController');
