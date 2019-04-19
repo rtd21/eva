@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Storage;
+use Image;
 
 class Speaker extends Model
 {
@@ -25,7 +28,17 @@ class Speaker extends Model
         return $this->hasOne('App\Models\ScheduleBlock');
     }
 
-    public function addPhoto($image)
+    public function addPhoto(Request $request)
     {
+        $photo = $request->file('image');
+        $fillName = $this->id . '.' . $photo->getClientOriginalExtension();
+        $img = Image::make($photo)
+            ->resize(100, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })
+            ->encode('jpg', 80);
+        Storage::disk('public')->put('/photos/'.$fillName, $img);
+        $this->photo = '/storage/photos/'.$fillName;
+        $this->save();
     }
 }

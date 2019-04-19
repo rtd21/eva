@@ -18,12 +18,11 @@ class SpeakerController extends Controller
 
     public function store(StoreSpeaker $request, $id)
     {
-        dd($request);
         $speaker = new Speaker;
         $speaker->event_id = $id;
         $speaker->fill($request->all());
-//        $speaker->addPhoto($request->image);
         $speaker->save();
+        $speaker->addPhoto($request);
         return redirect()->back();
     }
 

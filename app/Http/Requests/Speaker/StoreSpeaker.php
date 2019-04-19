@@ -27,7 +27,7 @@ class StoreSpeaker extends FormRequest
             'full_name' => 'required',
             'position' => 'required',
             'company' => 'required',
-            'image' => 'required',
+            'image' => 'required|image',
             'information' => 'required'
         ];
     }

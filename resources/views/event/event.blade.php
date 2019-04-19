@@ -96,7 +96,7 @@
                                 <h4 class="modal-title" id="myModalLabel">Add Speaker</h4>
                             </div>
                             <div class="modal-body">
-                                <form action="{{ route('event.speaker.store', $event->id) }}" method="POST">
+                                <form action="{{ route('event.speaker.store', $event->id) }}" method="POST" enctype="multipart/form-data">
                                     @method('POST')
                                     @csrf
                                     <div class="form-group">
@@ -115,8 +115,7 @@
                                         <div class="input-group mb-3">
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" id="photo" name="image">
-                                                <label class="custom-file-label" for="photo"
-                                                       aria-describedby="inputGroupFileAddon02">Choose Photo</label>
+                                                <label class="custom-file-label" for="photo">Choose Photo</label>
                                             </div>
                                         </div>
                                     </div>
@@ -136,7 +135,7 @@
                 <ul class="list-unstyled">
                     @foreach($event->speakers as $speaker)
                         <li class="media my-4">
-                            <img src="{{ $speaker->photo }}" class="mr-3" alt="...">
+                            <img src="{{ $speaker->photo }}" class="mr-3" alt="..." style="border-radius: 20%">
                             <div class="media-body">
                                 <h5 class="mt-0 mb-1">
                                     <a href="{{ route('event.speaker.show', [$event->id, $speaker->id]) }}">

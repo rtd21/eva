@@ -5,7 +5,7 @@
         <div class="row mx-lg-n5">
             <div class="col py-3 px-lg-5 bg-light">
                 <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="{{ $speaker->photo }}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{ $speaker->full_name }}</h5>
                         <p class="card-text">{{ $speaker->information }}</p>
