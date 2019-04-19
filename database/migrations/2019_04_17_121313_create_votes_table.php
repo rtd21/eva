@@ -19,7 +19,8 @@ class CreateVotesTable extends Migration
             $table->bigInteger('rating_id')->unsigned();
             $table->foreign('rating_id')
                 ->references('id')
-                ->on('ratings');
+                ->on('ratings')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

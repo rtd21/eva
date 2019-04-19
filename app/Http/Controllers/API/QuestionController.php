@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Requests\Question\StoreQuestion;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,7 +14,7 @@ class QuestionController extends Controller
         //
     }
 
-    public function store(Request $request)
+    public function store(StoreQuestion $request)
     {
         $question = new Question;
         $question->fill($request->all());

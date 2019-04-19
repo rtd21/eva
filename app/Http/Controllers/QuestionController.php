@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Question\ReplyQuestion;
 use App\Models\Question;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class QuestionController extends Controller
         return redirect()->back();
     }
 
-    public function reply(Request $request, $event_id, $question_id)
+    public function reply(ReplyQuestion $request, $event_id, $question_id)
     {
         $question = Question::find($question_id);
         $question->addReply($request->reply);

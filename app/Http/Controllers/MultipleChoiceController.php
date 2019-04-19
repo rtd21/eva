@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MultipleChoice\StoreMultipleChoice;
+use App\Http\Requests\MultipleChoice\UpdateMultipleChoice;
 use App\Models\MultipleChoice;
 use Illuminate\Http\Request;
 
 class MultipleChoiceController extends Controller
 {
-    public function store(Request $request, $event_id)
+    public function store(StoreMultipleChoice $request, $event_id)
     {
         $multipleChoice = new MultipleChoice();
         $multipleChoice->fill($request->all());
@@ -16,7 +18,7 @@ class MultipleChoiceController extends Controller
         return redirect()->back();
     }
 
-    public function update(Request $request, $event_id, $id)
+    public function update(UpdateMultipleChoice $request, $event_id, $id)
     {
         $multipleChoice = MultipleChoice::find($id);
         $multipleChoice->update([

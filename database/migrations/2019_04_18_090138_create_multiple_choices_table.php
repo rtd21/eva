@@ -22,7 +22,8 @@ class CreateMultipleChoicesTable extends Migration
             $table->bigInteger('event_id')->unsigned()->nullable();
             $table->foreign('event_id')
                 ->references('id')
-                ->on('events');
+                ->on('events')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

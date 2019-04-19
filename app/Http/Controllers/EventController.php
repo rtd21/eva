@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Event\StoreEvent;
+use App\Http\Requests\Event\UpdateEvent;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +15,7 @@ class EventController extends Controller
     {
     }
 
-    public function store(Request $request)
+    public function store(StoreEvent $request)
     {
         $event = new Event;
         $event->fill($request->all());
@@ -32,7 +34,7 @@ class EventController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateEvent $request, $id)
     {
         $event = Event::find($id);
         $event->update($request->all());

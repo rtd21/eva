@@ -185,7 +185,8 @@
                                     <div class="form-group">
                                         <label for="day">Day</label>
                                         <select class="custom-select" id="day" name="day">
-                                            <option selected disabled>Choose day...</option>
+                                            <option disabled>Choose day...</option>
+                                            <option selected></option>
                                             @for ($i = 1; $i <= $event->dayCount(); $i++)
                                                 <option value="{{ $i }}">{{ $i }}</option>
                                             @endfor
@@ -194,7 +195,8 @@
                                     <div class="form-group">
                                         <label for="speaker">Speaker</label>
                                         <select class="custom-select" id="speaker" name="speaker_id">
-                                            <option selected disabled>Choose speaker...</option>
+                                            <option disabled>Choose speaker...</option>
+                                            <option selected></option>
                                             @foreach ($event->speakers as $speaker)
                                                 <option value="{{ $speaker->id }}">{{ $speaker->full_name }}</option>
                                             @endforeach

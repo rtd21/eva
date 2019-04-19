@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Admin\UpdateAdmin;
 use App\Models\Admin;
 use App\Models\Event;
 use Auth;
@@ -26,7 +27,7 @@ class AdminController extends Controller
     {
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateAdmin $request, $id)
     {
         $admin = Admin::find($id);
         $admin->update($request->all());

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ScheduleBlock\StoreScheduleBlock;
 use App\Models\ScheduleBlock;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class ScheduleBlockController extends Controller
     {
     }
 
-    public function store(Request $request, $id)
+    public function store(StoreScheduleBlock $request, $id)
     {
         $block = new ScheduleBlock;
         $block->event_id = $id;
@@ -24,15 +25,6 @@ class ScheduleBlockController extends Controller
         return redirect()->back();
     }
 
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
 
     public function update(Request $request, $id)
     {

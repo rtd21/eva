@@ -20,7 +20,8 @@ class CreateQuestionsTable extends Migration
             $table->bigInteger('event_id')->unsigned()->nullable();
             $table->foreign('event_id')
                 ->references('id')
-                ->on('events');
+                ->on('events')
+                ->onDelete('cascade');
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')
                 ->references('id')

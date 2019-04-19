@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TagCloud\StoreTagCloud;
+use App\Http\Requests\TagCloud\UpdateTagCloud;
 use App\Models\TagCloud;
-use Illuminate\Http\Request;
 
 class TagCloudController extends Controller
 {
-    public function store(Request $request, $event_id)
+    public function store(StoreTagCloud $request, $event_id)
     {
         $tagCloud = new TagCloud;
         $tagCloud->fill($request->all());
@@ -16,7 +17,7 @@ class TagCloudController extends Controller
         return redirect()->back();
     }
 
-    public function update(Request $request, $event_id, $id)
+    public function update(UpdateTagCloud $request, $event_id, $id)
     {
         $tagCloud = TagCloud::find($id);
         $tagCloud->update([

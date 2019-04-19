@@ -24,4 +24,8 @@ class Speaker extends Model
     {
         return $this->hasOne('App\Models\ScheduleBlock');
     }
+
+    public function addPhoto($image)
+    {
+    }
 }

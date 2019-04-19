@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FreeEntry\StoreFreeEntry;
+use App\Http\Requests\FreeEntry\UpdateFreeEntry;
 use App\Models\FreeEntry;
 use Illuminate\Http\Request;
 
 class FreeEntryController extends Controller
 {
-    public function store(Request $request, $event_id)
+    public function store(StoreFreeEntry $request, $event_id)
     {
         $freeEntry = new FreeEntry;
         $freeEntry->fill($request->all());
@@ -16,7 +18,7 @@ class FreeEntryController extends Controller
         return redirect()->back();
     }
 
-    public function update(Request $request, $event_id, $id)
+    public function update(UpdateFreeEntry $request, $event_id, $id)
     {
         $freeEntry = FreeEntry::find($id);
         $freeEntry->update([

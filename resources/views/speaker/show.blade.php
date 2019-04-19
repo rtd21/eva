@@ -50,7 +50,7 @@
                                     <div class="form-group">
                                         <div class="input-group mb-3">
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="photo" name="image">
+                                                <input type="file" class="custom-file-input" id="photo" name="image" value="{{ $speaker->photo }}">
                                                 <label class="custom-file-label" for="photo" aria-describedby="inputGroupFileAddon02">Choose Photo</label>
                                             </div>
                                         </div>

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\Rating\StoreRating;
+use App\Http\Requests\Rating\UpdateRating;
+use App\Models\Rating;
 
 class RatingController extends Controller
 {
-    public function store(Request $request, $event_id)
+    public function store(StoreRating $request, $event_id)
     {
         $rating = new Rating;
         $rating->fill($request->all());
@@ -15,7 +17,7 @@ class RatingController extends Controller
         return redirect()->back();
     }
 
-    public function update(Request $request, $event_id, $id)
+    public function update(UpdateRating $request, $event_id, $id)
     {
         $rating = Rating::find($id);
         $rating->update([
