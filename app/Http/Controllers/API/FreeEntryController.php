@@ -39,8 +39,10 @@ class FreeEntryController extends Controller
     }
 
 
-    public function destroy($id)
+    public function destroy($event_id, $id)
     {
-        //
+        $freeEntry = FreeEntry::find($id);
+        $freeEntry->delete();
+        return redirect()->back();
     }
 }

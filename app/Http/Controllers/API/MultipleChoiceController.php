@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Choice;
+use App\Models\Event;
 use App\Models\MultipleChoice;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -35,12 +36,15 @@ class MultipleChoiceController extends Controller
             'question' => $request->question
         ]);
         $multipleChoice->setParams($request);
+        $multipleChoice->updateChoices($request);
         $multipleChoice->save();
         return redirect()->back();
     }
 
-    public function destroy($id)
+    public function destroy($event_id, $id)
     {
-        //
+        $event = MultipleChoice::find($id);
+        $event->delete();
+        return redirect()->back();
     }
 }

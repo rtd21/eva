@@ -326,6 +326,11 @@
                                         <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#editRating{{ $rating->id }}">
                                             Edit
                                         </a>
+                                        <form action="{{ route('event.rating.destroy', [$event->id, $rating->id]) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">x</button>
+                                        </form>
                                         <div class="modal fade" id="editRating{{ $rating->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -401,7 +406,7 @@
                                                     <label for="question">Question</label>
                                                     <input type="text" class="form-control" id="question" name="question" placeholder="Your question">
                                                 </div>
-                                                <input-component></input-component>
+                                                <input-component :start-index="0"></input-component>
                                                 <button type="submit" class="btn btn-success">Add Multiple Choice</button>
                                             </form>
                                         </div>
@@ -418,6 +423,11 @@
                                         <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#editMultipleChoice{{ $multipleChoice->id }}">
                                             Edit
                                         </a>
+                                        <form action="{{ route('event.multiple_choice.destroy', [$event->id, $multipleChoice->id]) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">x</button>
+                                        </form>
                                         <div class="modal fade" id="editMultipleChoice{{ $multipleChoice->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -459,6 +469,13 @@
                                                                 @endif
                                                                 <label class="custom-control-label" for="activate_pollMultipleChoice{{ $multipleChoice->id }}">Activate poll</label>
                                                             </div>
+                                                            @foreach($multipleChoice->choices as $choice)
+                                                                <div class="form-group">
+                                                                    <label for="choice[{{ $choice->id }}]">Choice: {{ $choice->id }}</label>
+                                                                    <input type="text" class="form-control" id="choice[{{ $choice->id }}]" name="choice[{{ $choice->id }}]" value="{{ $choice->answer }}">
+                                                                </div>
+                                                            @endforeach
+                                                            <input-component :start-index="{{ $choice->id }}"></input-component>
                                                             <button type="submit" class="btn btn-success">Save changes</button>
                                                         </form>
                                                     </div>
@@ -509,6 +526,11 @@
                                         <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#editFreeEntry{{ $freeEntry->id }}">
                                             Edit
                                         </a>
+                                        <form action="{{ route('event.free_entry.destroy', [$event->id, $freeEntry->id]) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">x</button>
+                                        </form>
                                         <div class="modal fade" id="editFreeEntry{{ $freeEntry->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -600,6 +622,11 @@
                                         <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#editTagCloud{{ $tagCloud->id }}">
                                             Edit
                                         </a>
+                                        <form action="{{ route('event.tag_cloud.destroy', [$event->id, $tagCloud->id]) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">x</button>
+                                        </form>
                                         <div class="modal fade" id="editTagCloud{{ $tagCloud->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -658,11 +685,5 @@
                 </div>
             </div>
         </div>
-
-        <script>
-            $(function () {
-                $('#myTab li:last-child a').tab('show')
-            })
-        </script>
     </div>
 @endsection

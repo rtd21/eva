@@ -1775,27 +1775,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['startIndex'],
   data: function data() {
     return {
-      inputs: [{
-        name: ''
-      }]
+      inputs: []
     };
   },
   methods: {
     addNewInput: function addNewInput() {
-      this.inputs.push({
-        name: 'new'
-      });
+      this.inputs.push(1);
     },
     removeInput: function removeInput() {
-      if (this.inputs.length > 1) {
+      if (this.inputs.length > 0) {
         this.inputs.pop();
       }
     }
-  },
-  mounted: function mounted() {
-    console.log('Component exeeee.');
   }
 });
 
@@ -37116,16 +37110,18 @@ var render = function() {
       _vm._v(" "),
       _vm._l(_vm.inputs, function(input, index) {
         return _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "choice" + index } }, [
-            _vm._v("Choice: " + _vm._s(index))
-          ]),
+          _c(
+            "label",
+            { attrs: { for: "choice" + index + _vm.startIndex + 1 } },
+            [_vm._v("Choice: " + _vm._s(index + _vm.startIndex + 1))]
+          ),
           _vm._v(" "),
           _c("input", {
             staticClass: "form-control",
             attrs: {
               type: "text",
-              id: "choice" + index,
-              name: "choice[" + index + "]"
+              id: "choice" + index + _vm.startIndex + 1,
+              name: "choice[" + index + _vm.startIndex + 1 + "]"
             }
           })
         ])

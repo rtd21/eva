@@ -37,8 +37,10 @@ class TagCloudController extends Controller
         return redirect()->back();
     }
 
-    public function destroy($id)
+    public function destroy($event_id, $id)
     {
-        //
+        $tagCloud = TagCloud::find($id);
+        $tagCloud->delete();
+        return redirect()->back();
     }
 }

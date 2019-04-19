@@ -56,4 +56,21 @@ class MultipleChoice extends Model
             $this->activate_poll = 1;
         }
     }
+
+    public function updateChoices(Request $request)
+    {
+        foreach ($request->choice as $id => $answer) {
+            $choice = $this->choices()->find($id);
+            if ($choice) {
+                $choice->answer = $answer;
+                $choice->save();
+            } else {
+                $newChoice = new Choice;
+                $newChoice->fill([
+                    'answer' => $answer
+                ]);
+                $this->choices()->save($newChoice);
+            }
+        }
+    }
 }
