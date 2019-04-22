@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResources([
+    'user' => 'API\UserController',
     'question' => 'API\QuestionController',
     'rating' => 'API\RatingController',
     'multiple_choice' => 'API\MultipleChoiceController',
