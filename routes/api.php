@@ -24,4 +24,5 @@ Route::apiResources([
     'multiple_choice' => 'API\MultipleChoiceController',
     'free_entry' => 'API\FreeEntryController',
     'tag_cloud' => 'API\TagCloudController',
+    'schedule' => 'API\ScheduleBlockController'
 ]);

@@ -18,4 +18,9 @@ class User extends Model
     {
         return $this->hasMany('App\Models\Question');
     }
+
+    public function blocks()
+    {
+        return $this->belongsToMany('App\Models\ScheduleBlock', 'block_user', 'user_id', 'block_id');
+    }
 }
