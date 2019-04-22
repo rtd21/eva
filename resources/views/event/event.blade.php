@@ -220,7 +220,18 @@
                                     <td>
                                         <div class="card" style="width: 18rem;">
                                             <div class="card-body">
-                                                <h5 class="card-title">{{ $block->name }}</h5>
+                                                <h5 class="card-title">
+                                                    <a class="link" href="{{ route('event.schedule.edit', [$event->id, $block->id]) }}">
+                                                        {{ $block->name }}
+                                                    </a>
+                                                </h5>
+                                                <form action="{{ route('event.schedule.destroy', [$event->id, $block->id]) }}" method="POST">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button type="submit" class="close" aria-label="Delete">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </form>
                                                 <ul class="list-group list-group-flush">
                                                     <li class="list-group-item">{{ $block->time }}</li>
                                                     <li class="list-group-item">

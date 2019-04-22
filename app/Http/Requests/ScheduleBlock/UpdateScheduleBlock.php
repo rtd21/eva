@@ -4,7 +4,7 @@ namespace App\Http\Requests\ScheduleBlock;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreScheduleBlock extends FormRequest
+class UpdateScheduleBlock extends StoreScheduleBlock
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,18 +23,6 @@ class StoreScheduleBlock extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => 'required',
-            'time' => 'required',
-            'day' => 'required',
-            'speaker_id' => 'required'
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'speaker_id.required' => 'Choose speaker!'
-        ];
+        return parent::rules();
     }
 }
