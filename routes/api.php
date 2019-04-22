@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResources([
+    'question' => 'API\QuestionController',
+    'rating' => 'API\RatingController',
+    'multiple_choice' => 'API\MultipleChoiceController',
+    'free_entry' => 'API\FreeEntryController',
+    'tag_cloud' => 'API\TagCloudController',
+]);
