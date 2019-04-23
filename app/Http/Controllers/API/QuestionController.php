@@ -48,4 +48,14 @@ class QuestionController extends Controller
             'status' => '200 OK'
         ]);
     }
+
+    public function updateVote($id)
+    {
+        $question = Question::find($id);
+        $question->votes = $question->votes + 1;
+        $question->save();
+        return response()->json([
+            'status' => '200 OK'
+        ]);
+    }
 }

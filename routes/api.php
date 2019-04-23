@@ -29,3 +29,6 @@ Route::apiResources([
 
 Route::post('speaker/{speaker}/like', 'API\SpeakerController@like')
        ->name('speaker.like');
+
+Route::post('question/{question}/updateVote', 'API\QuestionController@updateVote')
+    ->name('question.updateVote');
