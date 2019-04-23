@@ -26,3 +26,6 @@ Route::apiResources([
     'tag_cloud' => 'API\TagCloudController',
     'schedule' => 'API\ScheduleBlockController'
 ]);
+
+Route::post('speaker/{speaker}/like', 'API\SpeakerController@like')
+       ->name('speaker.like');

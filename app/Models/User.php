@@ -23,4 +23,9 @@ class User extends Model
     {
         return $this->belongsToMany('App\Models\ScheduleBlock', 'block_user', 'user_id', 'block_id');
     }
+
+    public function speakersWereLiked()
+    {
+        return $this->belongsToMany('App\Models\Speaker', 'likes', 'user_id', 'speaker_id');
+    }
 }
