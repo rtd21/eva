@@ -40,4 +40,11 @@ class TagCloud extends Model
             $this->activate_poll = 1;
         }
     }
+
+    public function addVote(Request $request)
+    {
+        $tagAnswer = new TagCloudAnswer();
+        $tagAnswer->fill($request->all());
+        $this->answers()->save($tagAnswer);
+    }
 }

@@ -41,4 +41,16 @@ class Speaker extends Model
         $this->photo = '/storage/photos/'.$fillName;
         $this->save();
     }
+
+    public function usersWhoLike()
+    {
+        return $this->belongsToMany('App\Models\User', 'likes', 'speaker_id', 'user_id');
+    }
+
+    public function like($user_id)
+    {
+        $user = User::find($user_id);
+        $this->usersWhoLike()->save($user);
+        $this->save();
+    }
 }

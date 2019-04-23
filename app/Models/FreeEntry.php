@@ -40,4 +40,11 @@ class FreeEntry extends Model
             $this->activate_poll = 1;
         }
     }
+
+    public function addVote(Request $request)
+    {
+        $freeEntry = new FreeEntry();
+        $freeEntry->fill($request->all());
+        $this->answers()->save($freeEntry);
+    }
 }

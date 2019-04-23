@@ -73,4 +73,11 @@ class MultipleChoice extends Model
             }
         }
     }
+
+    public function addVote(Request $request)
+    {
+        $choice = Choice::find($request->choice_id);
+        $choice->count = $choice->count + 1;
+        $choice->save();
+    }
 }

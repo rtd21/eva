@@ -8,15 +8,14 @@ use App\Http\Controllers\Controller;
 
 class RatingController extends Controller
 {
-    public function index($event_id)
+    public function update(Request $request, $id)
     {
-        $ratings = Rating::where('event_id', $event_id)->get();
+        //дописать разграничение прав
+        $rating = Rating::find($id);
+        $rating->addVote($request);
+        $rating->save();
         return response()->json([
-            'ratings' => $ratings
+            'status' => '200 OK'
         ]);
-    }
-
-    public function addVote(Request $request)
-    {
     }
 }

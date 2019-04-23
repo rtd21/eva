@@ -18,9 +18,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResources([
+    'user' => 'API\UserController',
     'question' => 'API\QuestionController',
     'rating' => 'API\RatingController',
     'multiple_choice' => 'API\MultipleChoiceController',
     'free_entry' => 'API\FreeEntryController',
     'tag_cloud' => 'API\TagCloudController',
+    'schedule' => 'API\ScheduleBlockController'
 ]);
+
+Route::post('speaker/{speaker}/like', 'API\SpeakerController@like')
+       ->name('speaker.like');
+
+Route::post('question/{question}/updateVote', 'API\QuestionController@updateVote')
+    ->name('question.updateVote');

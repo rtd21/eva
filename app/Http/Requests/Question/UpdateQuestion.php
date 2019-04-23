@@ -4,7 +4,7 @@ namespace App\Http\Requests\Question;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreQuestion extends FormRequest
+class UpdateQuestion extends StoreQuestion
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,6 @@ class StoreQuestion extends FormRequest
      */
     public function rules()
     {
-        return [
-            'question' => 'required',
-            'event_id' => 'required',
-            'user_id' => 'required'
-        ];
+        return parent::rules();
     }
 }
