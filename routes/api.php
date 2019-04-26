@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CheckAccessToken;
 use Illuminate\Http\Request;
 
 /*
@@ -13,22 +14,18 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('login', 'API\PassportController@login');
+
+Route::middleware(CheckAccessToken::class)->group(function () {
+    Route::post('speaker/{speaker}/like', 'API\SpeakerController@like');
+    Route::post('question/{question}/updateVote', 'API\QuestionController@updateVote');
+    Route::apiResources([
+        'users' => 'API\UserController',
+        'questions' => 'API\QuestionController',
+        'ratings' => 'API\RatingController',
+        'multiple_choices' => 'API\MultipleChoiceController',
+        'free_entries' => 'API\FreeEntryController',
+        'tag_clouds' => 'API\TagCloudController',
+        'schedules' => 'API\ScheduleBlockController'
+    ]);
 });
-
-Route::apiResources([
-    'user' => 'API\UserController',
-    'question' => 'API\QuestionController',
-    'rating' => 'API\RatingController',
-    'multiple_choice' => 'API\MultipleChoiceController',
-    'free_entry' => 'API\FreeEntryController',
-    'tag_cloud' => 'API\TagCloudController',
-    'schedule' => 'API\ScheduleBlockController'
-]);
-
-Route::post('speaker/{speaker}/like', 'API\SpeakerController@like')
-       ->name('speaker.like');
-
-Route::post('question/{question}/updateVote', 'API\QuestionController@updateVote')
-    ->name('question.updateVote');
