@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 
 Route::post('login', 'API\PassportController@login');
 
-Route::middleware(CheckAccessToken::class)->group(function () {
+Route::middleware('client')->group(function () {
     Route::post('speaker/{speaker}/like', 'API\SpeakerController@like');
     Route::post('question/{question}/updateVote', 'API\QuestionController@updateVote');
     Route::apiResources([

@@ -36,3 +36,14 @@ Route::middleware('auth')->group(function () {
     Route::post('event/{event}/question/{question}/reply', 'QuestionController@reply')
         ->name('event.question.reply');
 });
+
+Route::get('/redirect', function () {
+    $query = http_build_query([
+        'client_id' => 1,
+        'redirect_uri' => 'http://google.com',
+        'response_type' => 'token',
+        'scope' => '',
+    ]);
+
+    return redirect('http://eva8.ru/oauth/authorize?'.$query);
+});

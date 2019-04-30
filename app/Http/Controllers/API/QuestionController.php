@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\Question\StoreQuestion;
 use App\Http\Requests\Question\UpdateQuestion;
 use App\Models\Question;
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

@@ -15,10 +15,10 @@ class PassportController extends Controller
     {
         $user = new User();
         $user->fill($request->all())->save();
-        Auth::login($user);
         $accessToken = $user->createToken($user->id);
+        Auth::login($user);
         return response()->json([
-            'access_token' => $accessToken->token->id
+            'access_token' => $accessToken->accessToken
         ]);
     }
 }
